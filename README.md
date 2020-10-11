@@ -1,5 +1,7 @@
 ## TRAINING PIPELINE 
 
+* The aim is to artifically write melodies like BACH. This pipeline will gather, transform and train.
+
 ### Contents of Pipeline:
 
 * Web MIDI Scraper
@@ -9,7 +11,7 @@
 
 #### Webscraper:
 
-* MIDI is scraped from www.jsbach.net. All cello peices with single voice parts are scraped. We do this because the aim is to artifically write melodies like BACH. 
+* MIDI is scraped from www.jsbach.net. All cello peices with single voice parts are scraped. 
 
 #### MIDI Parser:
 
@@ -19,7 +21,7 @@
 
 * Model's architeture below
 
-        Embedded Pitch + Embedded Duration
+        Embedded Pitch  +  Embedded Duration
                         |
                         |
                         |
@@ -43,8 +45,6 @@ Parameters and Model Configurations, see:
 
     composer_RNN.py 
     composer_params.py
-
-## 
 
 
 ## EXECUTE PIPELINE
@@ -75,6 +75,9 @@ Reset will ease folders: 'data' and 'run'. This resets repo.
 ### EXECUTE
 After the initial repo clone, run: 
         
-        $ bash execute.sh
+    $ bash execute.sh
 
-This script will setup the directory and initate the webscraper to populate the porper directories with MIDI from a webpage. Once the data is prepared, the script tiggers the transformation and data engineering of the data into inputs. The training process is then set in motion. The script concludes with saved weight matrices that can then be used with future instantiated models to generate melodies from the matrices trained on BACH's data. 
+
+
+## Description 
+* This script will setup the directory and initate the webscraper to populate the proper directories with the scrapped MIDI, as well as other data. Once the data is prepared, the script tiggers the transformation and data engineering of the MIDI into LSTM inputs. The training process is then set in motion. The script concludes with saved weight matrices that can then be used with future instantiated models to generate melodies from the matrices trained on BACH's data. 
