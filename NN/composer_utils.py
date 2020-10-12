@@ -5,6 +5,7 @@ import glob
 
 from music21 import corpus, converter, chord, note
 
+import keras.models as mods
 from keras.utils import np_utils
 
 
@@ -176,7 +177,32 @@ def note_extraction(params):
 
 
 
+    def load_lookups(params):
+
+        with open(os.path.join(params['store_folder'], 'sets'), 'rb') as f:
+            sets = pickle.load(f)
+
+        with open(os.path.join(params['store_folder'], 'lookups'), 'rb') as f:
+            lookups = pickle.load(f)
+
+        return sets, lookups
 
 
+    def load_NN_with_weights(sets, lookups, params, model_class):
+
+        weights = os.path.join(params['run_folder'], 'weights')
+        weight_matrix = 'weights.h5'
+
+        model, attn_model = model_class(params).construct_network()
+
+        trained_weights = os.path.join(weights, weight_matrix )
+
+        model.load_weights(trained_weights)
+        model.summary()
+
+        return model, attn_model
+
+
+    
 
 
