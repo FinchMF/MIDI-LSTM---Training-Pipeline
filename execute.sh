@@ -11,6 +11,7 @@ echo '[i] Begin Pipeline... '
 python composer_train.py 
 
 echo '[i] Predictions and Results'
+python composer_write.py 
 
 
 

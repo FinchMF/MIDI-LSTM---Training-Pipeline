@@ -15,6 +15,7 @@ def set_params():
     params['store_folder'] = os.path.join(params['run_folder'], 'storage')
     params['data_folder'] = os.path.join('data', params['music_name'])
     params['weights_folder'] = os.path.join(params['run_folder'], 'weights')
+    params['output_folder'] = os.path.join(params['run_folder'], 'output')
     # data parameters
     params['intervals'] = range(1)
     params['sequence_length'] = 32
@@ -33,6 +34,10 @@ def set_params():
     params['notes_temp'] = 0.5
     params['duration_temp'] = 0.5
     params['max_addit_notes'] = 125
+    # prediction params
+    params['notes_temp'] = 0.5
+    params['duration_temp'] = 0.5
+    params['max_extra_notes'] = 50
       
     return params
 
