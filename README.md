@@ -58,6 +58,7 @@ The expection for the pipeline is to:
 * engineer the data to achitecture input
 * train model on scraped midi
 * save weights of best trained model
+* generate midi file
 
 ### How to Use
     
@@ -80,4 +81,5 @@ After the initial repo clone, run:
 
 
 ## Description 
-* This script will setup the directory and initate the webscraper to populate the proper directories with the scrapped MIDI, as well as other data. Once the data is prepared, the script tiggers the transformation and data engineering of the MIDI into LSTM inputs. The training process is then set in motion. The script concludes with saved weight matrices that can then be used with future instantiated models to generate melodies from the matrices trained on BACH's data. 
+* This script will setup the directory and initate the webscraper to populate the proper directories with the scrapped MIDI, as well as other data. Once the data is prepared, the script triggers the transformation and data engineering of the MIDI into LSTM inputs. The training process is then set in motion. The script concludes using the saved weight matrices to generate melodies from the matrices trained on BACH's data. The resulting MIDI file is then placed in the subdirectory, 'output', found in the 'Run Folder'
+
