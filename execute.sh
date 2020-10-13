@@ -1,9 +1,9 @@
 #!/bin/bash
 
 if ! -d './data'
-then echo '[+] Configuring Build and Recieving'
-
-bash setup.sh
+then 
+    echo '[+] Configuring Build and Recieving'
+    bash setup.sh
 
 fi
 

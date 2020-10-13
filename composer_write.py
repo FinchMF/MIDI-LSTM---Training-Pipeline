@@ -12,14 +12,18 @@ from NN import composer_RNN
 from NN import composer_utils
 
 def RNN_Gen_Midi():
+
     print('Preparing for Midi Generation\n')
     params = composer_params.set_params()
     print('Generating....\n')
     sets, lookups = composer_utils.load_lookups(params)
 
-    model, attn_model = composer_utils.load_NN_with_weights(sets, lookups, params, composer_RNN.RNN_Attention(params).construct_network())
+    params['n_notes'] = sets[1]
+    params['n_durations'] = sets[3]
 
-    notes, durations, sequence_length = composer_utils.get_seq_info(params, notes=False, durations=False)
+    model, attn_model = composer_utils.load_NN_with_weights(sets, lookups, params, composer_RNN.RNN_Attention(params))
+
+    notes, durations, sequence_length = composer_utils.get_seq_info(params)
 
     preds = composer_utils.generate_notes_from_input(params,
                                                     lookups[0], lookups[1],

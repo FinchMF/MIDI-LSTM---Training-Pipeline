@@ -58,7 +58,7 @@ class RNN_Attention:
                                                     save_best_only=True,
                                                     mode='min')
 
-        self.es = EarlyStopping(monitor='loss', restore_best_weights=True, patience=10)
+        self.es = EarlyStopping(monitor='loss', restore_best_weights=True, patience=20)
         self.callback_list = [self.chckpnt_progress, self.chckpnt_final, self.es]
 
         self.epochs = params['EPOCHS']
@@ -103,7 +103,8 @@ class RNN_Attention:
 
         model.compile(loss=['categorical_crossentropy', 
                             'categorical_crossentropy'],
-                            optimizer=self.opt)
+                      optimizer=self.opt,
+                      metrics=['acc'])
         model.summary()
 
         return model, attn_model

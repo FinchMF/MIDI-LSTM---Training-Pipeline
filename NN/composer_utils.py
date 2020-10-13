@@ -194,26 +194,20 @@ def load_NN_with_weights(sets, lookups, params, model_class):
     weights = os.path.join(params['run_folder'], 'weights')
     weight_matrix = 'weights.h5'
 
-    model, attn_model = model_class(params).construct_network()
+    model, attn_model = model_class.construct_network()
 
     trained_weights = os.path.join(weights, weight_matrix)
 
     model.load_weights(trained_weights)
-    model.summary()
 
     return model, attn_model
 
 
-def get_seq_info(params, notes, durations):
+def get_seq_info(params):
 
-    if notes and durations == False:
+    notes = ['START']
+    durations = [0]
 
-        notes = ['START']
-        durations = [0]
-
-    else:
-        notes = notes
-        durations = durations
 
     if params['sequence_length'] is not None:
         notes = ['START'] * (params['sequence_length'] - len(notes)) + notes
@@ -260,15 +254,15 @@ def generate_notes_from_input(params,
 
         prediction_input = [
 
-            np.array([notes_input_seq],
-            np.array([durations_input_seq]))
+            np.array([notes_input_seq]),
+            np.array([durations_input_seq])
             
         ]
 
         n_pred, d_pred = model.predict(prediction_input, verbose=0)
         
         if params['use_attention']:
-            attn_pred = attn_model.predict(prediction_input, verbose=0)
+            attn_pred = attn_model.predict(prediction_input, verbose=0)[0]
             att_matrix[(n_idx - len(attn_pred)+sequence_length):(n_idx+sequence_length), n_idx] = attn_pred
             
             new_note = np.zeros(22)
